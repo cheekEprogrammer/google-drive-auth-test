@@ -4,7 +4,6 @@
     button.innerText = "Authenticate your Google Drive When you are Ready";
     button.id = "authBtn";
 
-    // Apply enhanced styles
     button.style.padding = "10px 20px";
     button.style.fontSize = "16px";
     button.style.margin = "10px 0";

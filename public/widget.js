@@ -3,8 +3,29 @@
     const button = document.createElement("button");
     button.innerText = "Authenticate your Google Drive When you are Ready";
     button.id = "authBtn";
-    button.style.cssText =
-      "padding: 10px 20px; font-size: 16px; margin: 10px 0; display: block;";
+
+    // Apply enhanced styles
+    button.style.padding = "10px 20px";
+    button.style.fontSize = "16px";
+    button.style.margin = "10px 0";
+    button.style.display = "block";
+    button.style.backgroundColor = "#4285F4"; // Google blue
+    button.style.color = "#fff";
+    button.style.border = "none";
+    button.style.borderRadius = "5px";
+    button.style.cursor = "pointer";
+    button.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.2)";
+    button.style.transition = "background-color 0.3s, box-shadow 0.3s";
+
+    button.addEventListener("mouseover", () => {
+      button.style.backgroundColor = "#357AE8";
+      button.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.3)";
+    });
+
+    button.addEventListener("mouseout", () => {
+      button.style.backgroundColor = "#4285F4";
+      button.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.2)";
+    });
 
     button.addEventListener("click", function () {
       const redirectUri = `https://a0c1-142-116-173-206.ngrok-free.app/auth/google?app_id=${encodeURIComponent(
@@ -22,7 +43,7 @@
 
   const checkAuthentication = (appId, userId, callback) => {
     fetch(
-      `http://localhost:3000/auth/check?app_id=${encodeURIComponent(
+      `https://a0c1-142-116-173-206.ngrok-free.app/auth/check?app_id=${encodeURIComponent(
         appId
       )}&user_id=${encodeURIComponent(userId)}`
     )

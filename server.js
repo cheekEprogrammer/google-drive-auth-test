@@ -30,7 +30,8 @@ app.get("/auth/google", (req, res) => {
 
   const authUrl = oauth2Client.generateAuthUrl({
     access_type: "offline",
-    scope: ["https://www.googleapis.com/auth/drive.file"], // Updated scope to 'drive.file'
+    prompt: "consent", // Force re-authentication to get a refresh token
+    scope: ["https://www.googleapis.com/auth/drive.file"],
     state: JSON.stringify({ app_id, user_id }),
   });
 
@@ -103,6 +104,13 @@ app.get("/auth/google/callback", async (req, res) => {
       app_id,
       ...tokens,
     };
+
+    // Check if the refresh token is missing
+    if (!tokens.refresh_token) {
+      console.log(
+        `No refresh token provided. Please re-authenticate to obtain a refresh token for user ${user_id}.`
+      );
+    }
 
     // Set credentials for the OAuth2 client
     oauth2Client.setCredentials(tokens);
